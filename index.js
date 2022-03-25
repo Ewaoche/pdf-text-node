@@ -7,6 +7,10 @@ const app = express();
 app.use("/", express.static("public"));
 app.use(fileUpload());
 
+//Load env var
+dotenv.config({ path: './config/config.env' });
+
+
 app.post("/extract-text", (req, res) => {
     if (!req.files && !req.files.pdfFile) {
         res.status(400);
@@ -18,4 +22,4 @@ app.post("/extract-text", (req, res) => {
     });
 });
 
-app.listen(3000);
+app.listen(process.env.PORT);
